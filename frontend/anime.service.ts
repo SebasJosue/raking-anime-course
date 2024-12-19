@@ -6,8 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'  
 })  
 export class AnimeService {  
-  private apiUrl = 'http://localhost:3000'; // Cambia esto según tu backend  
-
+  private apiUrl = 'http://localhost:3000'; 
   constructor(private http: HttpClient) {}  
 
   // Métodos para interactuar con el servidor  

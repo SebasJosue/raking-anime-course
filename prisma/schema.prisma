@@ -12,3 +12,41 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model Character {
+  id          Int        @id @default(autoincrement())
+  name        String
+  anime       String     @default("") // O puedes eliminar esta línea si no es necesaria
+  powerLevel  Int
+  rank        Int
+  abilities   String[]
+  imageUrl    String?
+  preferences Preference[]
+  animeId     Int
+  animeRef    Anime      @relation(fields: [animeId], references: [id]) // Renombramos este campo
+}
+
+model Anime {
+  id         Int        @id @default(autoincrement())
+  title      String
+  characters Character[] 
+}
+
+model Preference {
+  id          Int        @id @default(autoincrement())
+  userId      Int
+  characterId Int
+  isFavorite  Boolean
+  character   Character  @relation(fields: [characterId], references: [id])
+  user        User       @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id          Int         @id @default(autoincrement())
+  username    String
+  email       String
+  preferences Preference[]
+}
+
+
